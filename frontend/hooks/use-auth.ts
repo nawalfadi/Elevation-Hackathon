@@ -1,6 +1,7 @@
 "use client";
 
 import { api } from "@frontend/api/client";
+import { markSecurityPromptPending } from "@frontend/components/ui/security-notice";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
@@ -16,8 +17,9 @@ export function useLogin() {
   const router = useRouter();
   return useMutation({
     mutationFn: api.login,
-    onSuccess: async (session) => {
-      await queryClient.invalidateQueries({ queryKey: ["session"] });
+    onSuccess: (session) => {
+      markSecurityPromptPending();
+      queryClient.setQueryData(["session"], session);
       router.push(session.user.role === "customer" ? "/app" : "/admin");
     },
   });
@@ -28,8 +30,9 @@ export function useSignup() {
   const router = useRouter();
   return useMutation({
     mutationFn: api.signup,
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["session"] });
+    onSuccess: (session) => {
+      markSecurityPromptPending();
+      queryClient.setQueryData(["session"], session);
       router.push("/app");
     },
   });
@@ -40,8 +43,8 @@ export function useLogout() {
   const router = useRouter();
   return useMutation({
     mutationFn: api.logout,
-    onSuccess: async () => {
-      await queryClient.clear();
+    onSuccess: () => {
+      queryClient.clear();
       router.push("/login");
     },
   });

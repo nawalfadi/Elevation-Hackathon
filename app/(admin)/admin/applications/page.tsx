@@ -13,14 +13,18 @@ import { useLocale } from "@frontend/hooks/use-locale";
 import { aiActions, lookup, statuses as statusCopy, types as typeCopy } from "@backend/i18n/catalog";
 import { formatDate } from "@frontend/utils/format";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useMemo } from "react";
 
-export default function AdminApplicationsPage() {
+function AdminApplications() {
   const types = useApplicationTypes();
   const statuses = useStatuses();
-  const [query, setQuery] = useState("");
-  const [statusKey, setStatusKey] = useState("");
-  const [typeId, setTypeId] = useState("");
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const query = searchParams.get("query") ?? "";
+  const statusKey = searchParams.get("status") ?? "";
+  const typeId = searchParams.get("type") ?? "";
   const filters = useMemo(
     () => ({
       query: query || undefined,
@@ -32,6 +36,14 @@ export default function AdminApplicationsPage() {
   const list = useAdminApplications(filters);
   const { t, tp } = useLocale();
 
+  function updateFilter(key: "query" | "status" | "type", value: string) {
+    const params = new URLSearchParams(searchParams.toString());
+    if (value) params.set(key, value);
+    else params.delete(key);
+    const next = params.toString();
+    router.replace(next ? `${pathname}?${next}` : pathname, { scroll: false });
+  }
+
   return (
     <PageTransition>
       <h1 className="text-3xl font-semibold tracking-tight">
@@ -41,7 +53,7 @@ export default function AdminApplicationsPage() {
         <Input
           label={<BiInline en="Search" ar="بحث" />}
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => updateFilter("query", e.target.value)}
           placeholder={t("Name, email, file", "اسم، بريد، ملف")}
         />
         <label className="block space-y-2">
@@ -51,7 +63,7 @@ export default function AdminApplicationsPage() {
           <select
             className="h-11 w-full rounded-control border border-line bg-white px-3 text-sm"
             value={statusKey}
-            onChange={(e) => setStatusKey(e.target.value)}
+            onChange={(e) => updateFilter("status", e.target.value)}
           >
             <option value="">{t("All statuses", "كل الحالات")}</option>
             {statuses.data?.map((status) => (
@@ -68,7 +80,7 @@ export default function AdminApplicationsPage() {
           <select
             className="h-11 w-full rounded-control border border-line bg-white px-3 text-sm"
             value={typeId}
-            onChange={(e) => setTypeId(e.target.value)}
+            onChange={(e) => updateFilter("type", e.target.value)}
           >
             <option value="">{t("All products", "كل المنتجات")}</option>
             {types.data?.map((type) => (
@@ -104,9 +116,20 @@ export default function AdminApplicationsPage() {
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
-                  {row.recommendation ? (
-                    <Badge tone={statusTone(row.recommendation.action)}>
-                      <BiInline pair={lookup(aiActions, row.recommendation.action)} />
+                  {row.recommendation &&
+                  !((row.recommendation.action === "review" || row.recommendation.action === "reject") &&
+                    row.status.key === "under_review") ? (
+                    <Badge
+                      tone={statusTone(
+                        row.recommendation.action === "reject" ? "review" : row.recommendation.action,
+                      )}
+                    >
+                      <BiInline
+                        pair={lookup(
+                          aiActions,
+                          row.recommendation.action === "reject" ? "review" : row.recommendation.action,
+                        )}
+                      />
                     </Badge>
                   ) : null}
                   <Badge tone={statusTone(row.status.key)}>
@@ -123,5 +146,13 @@ export default function AdminApplicationsPage() {
         </div>
       </div>
     </PageTransition>
+  );
+}
+
+export default function AdminApplicationsPage() {
+  return (
+    <Suspense fallback={<CardSkeleton rows={6} />}>
+      <AdminApplications />
+    </Suspense>
   );
 }

@@ -27,9 +27,9 @@ export function useSubmitReview(id: string) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (input: SubmitReviewInput) => api.submitReview(id, input),
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["admin"] });
-      await queryClient.invalidateQueries({ queryKey: ["applications"] });
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ["admin"] });
+      void queryClient.invalidateQueries({ queryKey: ["applications"] });
     },
   });
 }

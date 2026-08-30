@@ -13,7 +13,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         { href: "/admin", label: "Dashboard", labelAr: "لوحة التحكم" },
         { href: "/admin/applications", label: "Applications", labelAr: "الطلبات" },
         { href: "/admin/flags", label: "Flags", labelAr: "الإشارات" },
-        { href: "/admin/performance", label: "Performance", labelAr: "الأداء", roles: ["manager"] },
+        { href: "/admin/performance", label: "Performance", labelAr: "الأداء" },
       ]}
     >
       {children}

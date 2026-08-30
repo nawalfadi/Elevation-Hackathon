@@ -16,7 +16,6 @@ import {
   ListChecks,
   ScanSearch,
   ShieldAlert,
-  Sparkles,
   Users,
   Workflow,
   XCircle,
@@ -101,7 +100,7 @@ const customerPain = [
   {
     icon: EyeOff,
     title: "Zero Visibility",
-    body: "Unclear requirements, leading to wrong, expired, or low-quality uploads.",
+    body: "Unclear requirements, leading to wrong, expired, or low quality uploads.",
   },
   {
     icon: Flag,
@@ -111,24 +110,24 @@ const customerPain = [
   {
     icon: Building2,
     title: "Branch Dependency",
-    body: "Manual in-person re-submissions and restarting from scratch for every loan.",
+    body: "Manual in person resubmissions and restarting from scratch for every loan.",
   },
 ];
 
 const employeePain = [
   {
     icon: Layers,
-    title: "60–70% Manual Drag",
+    title: "60 to 70% Manual Drag",
     body: "Sifting through PDFs and chasing applicants for missing files.",
   },
   {
     icon: Workflow,
-    title: "5-Tab System Switching",
+    title: "5 Tab System Switching",
     body: "Manually checking Absher, GOSI, Zakat, Sijil, and Simah.",
   },
   {
     icon: ShieldAlert,
-    title: "Human-Eye Fraud Risk",
+    title: "Human Eye Fraud Risk",
     body: "Undetected tampering, inconsistent decisions, and systemic backlog.",
   },
 ];
@@ -141,8 +140,8 @@ const customerProduct = [
   },
   {
     icon: ScanSearch,
-    title: "Real-Time Validator",
-    body: "Catches blur, expiry, name/ID mismatch before submit.",
+    title: "Real Time Validator",
+    body: "Catches blur, expiry, name or ID mismatch before submit.",
   },
   {
     icon: FileSearch,
@@ -159,18 +158,18 @@ const customerProduct = [
 const employeeProduct = [
   {
     icon: IdCard,
-    title: "Auto-Extracted Summary Card",
+    title: "Auto Extracted Summary Card",
     body: "All core applicant metrics in 1 clean view.",
   },
   {
     icon: Landmark,
-    title: "Auto-Verification · 5 Gov Systems",
+    title: "Auto Verification, 5 Gov Systems",
     body: "Absher, GOSI, Zakat, Sijil, and Simah.",
   },
   {
     icon: ShieldAlert,
     title: "Fraud Detection Engine",
-    body: "Metadata checks, duplicate IPs/phones.",
+    body: "Metadata checks, duplicate IPs and phones.",
   },
   {
     icon: Gauge,
@@ -188,7 +187,7 @@ const govSystems = [
 ];
 
 const impact = [
-  { label: "Avg. Loan Processing", before: "2–3 Weeks", after: "2–3 Days" },
+  { label: "Avg. Loan Processing", before: "2 to 3 Weeks", after: "2 to 3 Days" },
   { label: "Employee Review Time", before: "~45 min", after: "~8 min" },
   { label: "Incomplete Submission Rate", before: "~60%", after: "~10%" },
   { label: "Customer Branch Visits", before: "Often required", after: "Near zero" },
@@ -212,7 +211,7 @@ function SecurityMocks() {
       <Item>
         <Glass className="h-full p-7">
           <EyeOff className="h-5 w-5 text-emerald-400" />
-          <h3 className="mt-5 font-display text-xl font-bold">1. In-Browser Client Redaction</h3>
+          <h3 className="mt-5 font-display text-xl font-bold">1. In Browser Client Redaction</h3>
           <p className="mt-3 text-sm leading-6 text-white/65">
             PII, national ID numbers, and sensitive fields are blurred/masked on the client side before display.
           </p>
@@ -254,9 +253,9 @@ function SecurityMocks() {
       <Item>
         <Glass className="h-full p-7">
           <Fingerprint className="h-5 w-5 text-emerald-400" />
-          <h3 className="mt-5 font-display text-xl font-bold">3. Zero-Retention Client Mock</h3>
+          <h3 className="mt-5 font-display text-xl font-bold">3. Zero Retention Client Mock</h3>
           <p className="mt-3 text-sm leading-6 text-white/65">
-            Session-only memory simulation demonstrating compliance with local banking data retention standards without persisting sensitive files.
+            Session only memory simulation demonstrating compliance with local banking data retention standards without persisting sensitive files.
           </p>
           <div className="mt-6 rounded-2xl border border-white/10 bg-black/30 px-4 py-4">
             <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/40">Session memory</p>
@@ -276,16 +275,17 @@ export default function App() {
 
   return (
     <div className="ambient min-h-screen">
-      <header className="fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-[#030712]/70 backdrop-blur-md">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          <div className="flex items-center gap-3">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand text-slate-950">
-              <Sparkles className="h-4 w-4" />
-            </span>
-            <div>
-              <p className="font-display text-sm font-bold tracking-wide">ENHANCED</p>
-              <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/45">AI Document Intelligence</p>
-            </div>
+      <header className="border-b border-white/10 bg-[#030712]">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-2.5">
+          <div className="flex flex-col items-center text-center">
+            <img
+              src="/logo.png"
+              alt=""
+              className="h-12 w-auto bg-transparent object-contain"
+            />
+            <p className="mt-1 font-display text-sm font-bold uppercase tracking-[0.16em] text-white">Elevation</p>
+            <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.12em] text-cyan-300">AI Driven Loan Platform</p>
+            <p className="mt-0.5 text-[10px] font-medium text-white/90">Transforming the Journey</p>
           </div>
           <button
             type="button"
@@ -297,7 +297,7 @@ export default function App() {
         </div>
       </header>
 
-      <section className="relative flex min-h-screen flex-col justify-center px-6 pb-16 pt-28">
+      <section className="relative flex min-h-[calc(100vh-7rem)] flex-col justify-center px-6 py-16">
         <Reveal className="mx-auto w-full max-w-6xl">
           <Item>
             <Eyebrow>AI DOCUMENT INTELLIGENCE PLATFORM</Eyebrow>
@@ -311,15 +311,15 @@ export default function App() {
           </Item>
           <Item>
             <p className="mt-8 max-w-3xl text-lg leading-8 text-white/65 sm:text-xl">
-              A unified, two-sided AI engine that validates customer documents instantly and gives employees an
-              auto-verified copilot with direct simulated government integrations.
+              A unified, two sided AI engine that validates customer documents instantly and gives employees an
+              auto verified copilot with direct simulated government integrations.
             </p>
           </Item>
           <Item>
             <div className="mt-12 grid gap-3 sm:grid-cols-3">
               {[
-                "2-3 Weeks ➔ 2-3 Days Processing",
-                "45 min ➔ 8 min Review",
+                "2 to 3 Weeks to 2 to 3 Days Processing",
+                "45 min to 8 min Review",
                 "5X Reviewer Capacity",
               ].map((stat) => (
                 <div
@@ -343,7 +343,7 @@ export default function App() {
       <section className="mx-auto max-w-6xl px-6 py-28">
         <Reveal>
           <Item>
-            <Eyebrow>// THE PAIN POINTS</Eyebrow>
+            <Eyebrow>THE PAIN POINTS</Eyebrow>
           </Item>
           <Item>
             <h2 className="mt-4 font-display text-4xl font-bold tracking-tight sm:text-5xl">The Problem</h2>
@@ -396,7 +396,7 @@ export default function App() {
       <section className="mx-auto max-w-6xl px-6 py-28">
         <Reveal>
           <Item>
-            <Eyebrow>// THE ARCHITECTURE</Eyebrow>
+            <Eyebrow>THE ARCHITECTURE</Eyebrow>
           </Item>
           <Item>
             <h2 className="mt-4 max-w-3xl font-display text-4xl font-bold tracking-tight sm:text-5xl">
@@ -451,7 +451,7 @@ export default function App() {
       <section className="mx-auto max-w-6xl px-6 py-28">
         <Reveal>
           <Item>
-            <Eyebrow>// AUTOMATED CROSS-CHECKING (SIMULATED MVP)</Eyebrow>
+            <Eyebrow>AUTOMATED CROSS-CHECKING</Eyebrow>
           </Item>
           <Item>
             <h2 className="mt-4 font-display text-4xl font-bold tracking-tight sm:text-5xl">
@@ -485,7 +485,7 @@ export default function App() {
       <section className="mx-auto max-w-6xl px-6 py-28">
         <Reveal>
           <Item>
-            <Eyebrow>// ZERO-DATA RISK ARCHITECTURE</Eyebrow>
+            <Eyebrow>ZERO-DATA RISK ARCHITECTURE</Eyebrow>
           </Item>
           <Item>
             <h2 className="mt-4 font-display text-4xl font-bold tracking-tight sm:text-5xl">
@@ -494,7 +494,7 @@ export default function App() {
           </Item>
           <Item>
             <p className="mt-4 max-w-2xl text-white/60">
-              Frontend MVP ready — no live backend or database connection required.
+              Frontend MVP ready. No live backend or database connection required.
             </p>
           </Item>
         </Reveal>
@@ -504,7 +504,7 @@ export default function App() {
       <section className="mx-auto max-w-6xl px-6 py-28">
         <Reveal>
           <Item>
-            <Eyebrow>// TANGIBLE ROI</Eyebrow>
+            <Eyebrow>TANGIBLE RESULTS</Eyebrow>
           </Item>
           <Item>
             <h2 className="mt-4 font-display text-4xl font-bold tracking-tight sm:text-5xl">Impact matrix</h2>
@@ -539,14 +539,14 @@ export default function App() {
             <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[32px] border border-emerald-400/30 bg-[#05080f] px-8 py-20 shadow-glow sm:px-16">
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(700px_300px_at_20%_0%,rgba(16,185,129,0.18),transparent_60%)]" />
               <div className="relative">
-                <Eyebrow>// LIVE HANDOFF</Eyebrow>
+                <Eyebrow>LIVE HANDOFF</Eyebrow>
                 <h2 className="mt-5 font-display text-4xl font-bold leading-tight tracking-tight sm:text-6xl">
                   Built for the Hackathon.
                   <br />
                   Ready to Test.
                 </h2>
                 <p className="mt-6 max-w-2xl text-lg text-white/60">
-                  Experience real-time document validation, metadata fraud flags, and instant employee summary profiles.
+                  Experience real time document validation, metadata fraud flags, and instant employee summary profiles.
                 </p>
                 <button
                   type="button"

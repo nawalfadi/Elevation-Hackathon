@@ -4,6 +4,7 @@ import { setSessionCookie } from "@backend/auth/session";
 import { store } from "@backend/db/store";
 import { signInWithPassword } from "@backend/firebase/auth-rest";
 import { isFirebaseClientConfigured } from "@backend/firebase/config";
+import { TimeoutError, withTimeout } from "@backend/utils/timeout";
 
 const schema = z.object({
   email: z.string().email(),
@@ -13,16 +14,22 @@ const schema = z.object({
 export async function POST(request: Request) {
   try {
     const body = schema.parse(await readJson(request));
+    let firebaseOk = false;
 
     if (isFirebaseClientConfigured()) {
-      await signInWithPassword(body.email, body.password);
+      try {
+        await withTimeout(signInWithPassword(body.email, body.password), 2500);
+        firebaseOk = true;
+      } catch (error) {
+        if (!(error instanceof TimeoutError)) throw error;
+      }
     }
 
     const user = await store.findUserByEmail(body.email);
     if (!user) {
       return json({ error: "Invalid email or password. · البريد أو كلمة المرور غير صحيحة." }, 401);
     }
-    if (!isFirebaseClientConfigured() && user.password_hash !== body.password) {
+    if (!firebaseOk && user.password_hash !== body.password) {
       return json({ error: "Invalid email or password. · البريد أو كلمة المرور غير صحيحة." }, 401);
     }
 
@@ -38,3 +45,4 @@ export async function POST(request: Request) {
     return errorResponse(error, 400);
   }
 }
+

@@ -8,9 +8,9 @@ export function useUploadDocument(applicationId: string) {
   return useMutation({
     mutationFn: ({ documentTypeId, file }: { documentTypeId: string; file: File }) =>
       api.uploadDocument(applicationId, documentTypeId, file),
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["applications", applicationId] });
-      await queryClient.invalidateQueries({ queryKey: ["checklist", applicationId] });
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ["applications", applicationId] });
+      void queryClient.invalidateQueries({ queryKey: ["checklist", applicationId] });
     },
   });
 }
@@ -19,9 +19,9 @@ export function useValidateDocument(applicationId: string) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (documentId: string) => api.validateDocument(documentId),
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["applications", applicationId] });
-      await queryClient.invalidateQueries({ queryKey: ["checklist", applicationId] });
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ["applications", applicationId] });
+      void queryClient.invalidateQueries({ queryKey: ["checklist", applicationId] });
     },
   });
 }

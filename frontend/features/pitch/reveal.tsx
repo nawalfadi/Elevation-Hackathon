@@ -32,17 +32,20 @@ export function Eyebrow({
   en,
   ar,
   light = false,
+  className,
 }: {
   children?: ReactNode;
   en?: string;
   ar?: string;
   light?: boolean;
+  className?: string;
 }) {
   return (
     <p
       className={cn(
         "text-[11px] font-semibold uppercase tracking-[0.22em]",
         light ? "text-gold" : "text-ink-faint",
+        className,
       )}
     >
       {en && ar ? <BiInline en={en} ar={ar} /> : children}

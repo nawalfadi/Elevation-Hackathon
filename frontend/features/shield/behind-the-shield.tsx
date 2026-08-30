@@ -5,10 +5,12 @@ import { Button } from "@frontend/components/ui/button";
 import { Card, CardBody, CardDescription, CardHeader, CardTitle } from "@frontend/components/ui/card";
 import { Eyebrow, Reveal } from "@frontend/features/pitch/reveal";
 import { useLocale } from "@frontend/hooks/use-locale";
+import { useSession } from "@frontend/hooks/use-auth";
 import { useUiStore } from "@frontend/store/ui";
 import { cn } from "@frontend/utils/cn";
 import { AnimatePresence, motion } from "framer-motion";
 import {
+  ArrowRight,
   BadgeCheck,
   Bell,
   CreditCard,
@@ -25,6 +27,7 @@ import {
   Users,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const dataTypes = [
   {
@@ -184,9 +187,12 @@ const demoActivity = [
 
 export function BehindTheShield() {
   const { t } = useLocale();
+  const { data } = useSession();
   const pushToast = useUiStore((state) => state.pushToast);
   const [step, setStep] = useState(0);
   const [playing, setPlaying] = useState(false);
+  const user = data && "user" in data ? data.user : null;
+  const homeHref = user?.role === "customer" ? "/app" : user ? "/admin" : "/";
   const [showActivity, setShowActivity] = useState(false);
 
   useEffect(() => {
@@ -251,8 +257,8 @@ export function BehindTheShield() {
           </h2>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-ink-muted">
             <Bi
-              en="A request only uses the information needed to complete that step — nothing extra."
-              ar="يستخدم الطلب المعلومات اللازمة لإتمام تلك الخطوة فقط — بلا زيادة."
+              en="A request only uses the information needed to complete that step. Nothing extra."
+              ar="يستخدم الطلب المعلومات اللازمة لإتمام تلك الخطوة فقط، بلا زيادة."
               compact
             />
           </p>
@@ -285,8 +291,8 @@ export function BehindTheShield() {
           </h2>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-ink-muted">
             <Bi
-              en="Your data is available only to you, approved systems, and authorized staff — and only when it is needed."
-              ar="بياناتك متاحة لك وللأنظمة المعتمدة وللموظفين المخولين فقط — وعند الحاجة."
+              en="Your data is available only to you, approved systems, and authorized staff, and only when it is needed."
+              ar="بياناتك متاحة لك وللأنظمة المعتمدة وللموظفين المخولين فقط، وعند الحاجة."
               compact
             />
           </p>
@@ -394,8 +400,8 @@ export function BehindTheShield() {
           </h2>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-ink-muted">
             <Bi
-              en="These are the everyday safeguards around your file — explained in plain language."
-              ar="هذه الحماية اليومية حول ملفك — بلغة واضحة."
+              en="These are the everyday safeguards around your file, explained in plain language."
+              ar="هذه الحماية اليومية حول ملفك، بلغة واضحة."
               compact
             />
           </p>
@@ -499,11 +505,17 @@ export function BehindTheShield() {
             </h2>
             <p className="mt-4 text-base leading-7 text-white/70">
               <Bi
-                en="We show what is used, who can see it, how it is checked, and how it is watched — so you never have to guess."
-                ar="نوضح ما يُستخدم ومن يراه وكيف يُفحص وكيف يُراقَب — حتى لا تضطر للتخمين."
+                en="We show what is used, who can see it, how it is checked, and how it is watched, so you never have to guess."
+                ar="نوضح ما يُستخدم ومن يراه وكيف يُفحص وكيف يُراقَب، حتى لا تضطر للتخمين."
                 compact
               />
             </p>
+            <Link href={homeHref} className="mt-8 inline-flex">
+              <Button size="lg">
+                <BiInline en="Back to main page" ar="العودة إلى الصفحة الرئيسية" />
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
           </div>
         </div>
       </Reveal>

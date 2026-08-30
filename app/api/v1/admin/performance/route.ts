@@ -4,7 +4,7 @@ import { store } from "@backend/db/store";
 
 export async function GET() {
   try {
-    await requireUser(["manager"]);
+    await requireUser(["reviewer", "manager"]);
     return json(await store.performance());
   } catch (error) {
     return errorResponse(error);

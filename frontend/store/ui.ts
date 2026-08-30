@@ -29,7 +29,7 @@ export const useUiStore = create<UiState>((set) => ({
   locale: "en",
   setLocale: (locale) => {
     if (typeof window !== "undefined") window.localStorage.setItem(STORAGE_KEY, locale);
-    set({ locale });
+    set((state) => (state.locale === locale ? state : { locale }));
   },
   toasts: [],
   pushToast: (toast) =>

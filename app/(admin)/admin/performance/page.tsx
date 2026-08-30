@@ -16,7 +16,7 @@ export default function PerformancePage() {
   const { t } = useLocale();
   const role = session.data && "user" in session.data ? session.data.user?.role : null;
 
-  if (role && role !== "manager") {
+  if (role && role !== "manager" && role !== "reviewer") {
     return (
       <ErrorState
         title={<Bi en="Manager access only" ar="للمديرين فقط" compact />}
@@ -47,7 +47,7 @@ export default function PerformancePage() {
             { label: t("Approval rate", "نسبة القبول"), value: `${Math.round(data.approval_rate * 100)}%` },
             {
               label: t("Median review", "وسيط المراجعة"),
-              value: data.median_review_hours === null ? "—" : `${data.median_review_hours}h`,
+              value: data.median_review_hours === null ? "n/a" : `${data.median_review_hours}h`,
             },
             { label: t("Flag rate", "معدل الإشارات"), value: `${Math.round(data.flag_rate * 100)}%` },
           ]}

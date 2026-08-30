@@ -29,11 +29,11 @@ export function SummaryCard({ detail }: { detail: ApplicationDetail }) {
         <Metric label={t("Product", "المنتج")} value={tp(lookup(types, detail.type.key, detail.type.name))} />
         <Metric
           label={t("Requested", "المطلوب")}
-          value={typeof amount === "number" ? formatCurrency(amount) : "—"}
+          value={typeof amount === "number" ? formatCurrency(amount) : "n/a"}
         />
         <Metric label={t("Documents", "المستندات")} value={`${docsOk}/${detail.checklist.length}`} />
         <Metric label={t("Open flags", "إشارات مفتوحة")} value={String(flags.length)} />
-        <Metric label={t("Phone", "الهاتف")} value={detail.applicant.phone ?? "—"} />
+        <Metric label={t("Phone", "الهاتف")} value={detail.applicant.phone ?? "n/a"} />
         <Metric label={t("File ID", "رقم الملف")} value={detail.application.id.slice(0, 8)} />
       </CardBody>
     </Card>

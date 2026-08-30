@@ -32,12 +32,12 @@ const arabic = Noto_Sans_Arabic({
 });
 
 export const metadata: Metadata = {
-  title: "Elevation / إليفيشن — AI-Driven Loan Platform",
+  title: "Elevation / إليفيشن, AI Driven Loan Platform",
   description:
-    "AI-powered document intelligence for lending. One system for applicants and reviewers. · ذكاء مستندات للإقراض. نظام واحد للمتقدمين والمراجعين.",
+    "AI-powered document intelligence for lending. One system for applicants and reviewers. ذكاء مستندات للإقراض. نظام واحد للمتقدمين والمراجعين.",
   icons: {
-    icon: "/brand/logo-mark.png",
-    apple: "/brand/logo-mark.png",
+    icon: "/brand/logo.png",
+    apple: "/brand/logo.png",
   },
 };
 

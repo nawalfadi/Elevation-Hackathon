@@ -4,6 +4,7 @@ import { setSessionCookie } from "@backend/auth/session";
 import { store } from "@backend/db/store";
 import { signUpWithPassword } from "@backend/firebase/auth-rest";
 import { isFirebaseClientConfigured } from "@backend/firebase/config";
+import { TimeoutError, withTimeout } from "@backend/utils/timeout";
 
 const schema = z.object({
   email: z.string().email(),
@@ -18,8 +19,15 @@ export async function POST(request: Request) {
     let firebaseId: string | undefined;
 
     if (isFirebaseClientConfigured()) {
-      const created = await signUpWithPassword(body.email, body.password, body.full_name);
-      firebaseId = created.localId;
+      try {
+        const created = await withTimeout(
+          signUpWithPassword(body.email, body.password, body.full_name),
+          2500,
+        );
+        firebaseId = created.localId;
+      } catch (error) {
+        if (!(error instanceof TimeoutError)) throw error;
+      }
     }
 
     const user = await store.createUser({
@@ -41,3 +49,4 @@ export async function POST(request: Request) {
     return errorResponse(error, 400);
   }
 }
+

@@ -14,21 +14,19 @@ export async function uploadApplicationFile(input: {
   const storage = getAdminStorage();
   if (!storage) return null;
 
-  try {
-    const safeName = input.fileName.replace(/[^a-zA-Z0-9._-]/g, "_");
-    const objectPath = `${storageFolders.documents}/${input.applicationId}/${input.documentTypeId}/${Date.now()}-${safeName}`;
-    const bucket = storage.bucket();
-    const file = bucket.file(objectPath);
+  const safeName = input.fileName.replace(/[^a-zA-Z0-9._-]/g, "_");
+  const objectPath = `${storageFolders.documents}/${input.applicationId}/${input.documentTypeId}/${Date.now()}-${safeName}`;
+  const bucket = storage.bucket();
+  const file = bucket.file(objectPath);
 
-    await file.save(input.bytes, {
+  void file
+    .save(input.bytes, {
       contentType: input.mimeType,
       metadata: {
         cacheControl: "private, max-age=0",
       },
-    });
+    })
+    .catch(() => undefined);
 
-    return objectPath;
-  } catch {
-    return null;
-  }
+  return null;
 }

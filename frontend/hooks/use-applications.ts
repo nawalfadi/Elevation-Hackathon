@@ -1,8 +1,9 @@
 "use client";
 
 import { api } from "@frontend/api/client";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { UpsertAnswerInput } from "@backend/types";
+import { useEffect, useState } from "react";
 
 export function useApplicationTypes() {
   return useQuery({ queryKey: ["application-types"], queryFn: api.applicationTypes });
@@ -13,10 +14,18 @@ export function useStatuses() {
 }
 
 export function useQuestions(applicationTypeId?: string, answers?: Record<string, unknown>) {
+  const [debouncedAnswers, setDebouncedAnswers] = useState(answers);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setDebouncedAnswers(answers), 250);
+    return () => window.clearTimeout(timer);
+  }, [answers]);
+
   return useQuery({
-    queryKey: ["questions", applicationTypeId, answers],
-    queryFn: () => api.questions(applicationTypeId, answers),
+    queryKey: ["questions", applicationTypeId, debouncedAnswers],
+    queryFn: () => api.questions(applicationTypeId, debouncedAnswers),
     enabled: Boolean(applicationTypeId),
+    placeholderData: keepPreviousData,
   });
 }
 
@@ -36,8 +45,8 @@ export function useCreateApplication() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: api.createApplication,
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["applications"] });
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ["applications"] });
     },
   });
 }
@@ -46,9 +55,9 @@ export function useSaveAnswers(id: string) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (answers: UpsertAnswerInput[]) => api.saveAnswers(id, answers),
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["applications", id] });
-      await queryClient.invalidateQueries({ queryKey: ["checklist", id] });
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ["applications", id] });
+      void queryClient.invalidateQueries({ queryKey: ["checklist", id] });
     },
   });
 }
@@ -65,8 +74,8 @@ export function useSubmitApplication(id: string) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: () => api.submitApplication(id),
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["applications"] });
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ["applications"] });
     },
   });
 }

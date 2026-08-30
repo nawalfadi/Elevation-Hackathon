@@ -11,7 +11,7 @@ export default async function CustomerLayout({ children }: { children: React.Rea
     <AppShell
       items={[
         { href: "/app", label: "Overview", labelAr: "نظرة عامة" },
-        { href: "/app/apply", label: "New application", labelAr: "طلب جديد" },
+        { href: "/app/apply", label: "New application", labelAr: "طلب جديد", cta: true },
         { href: "/app/shield", label: "Behind the Shield", labelAr: "خلف الدرع" },
       ]}
     >
