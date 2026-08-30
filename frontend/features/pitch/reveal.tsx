@@ -41,8 +41,8 @@ export function Eyebrow({
   return (
     <p
       className={cn(
-        "font-mono text-[11px] font-medium uppercase tracking-[0.22em]",
-        light ? "text-white/45" : "text-ink-faint",
+        "text-[11px] font-semibold uppercase tracking-[0.22em]",
+        light ? "text-gold" : "text-ink-faint",
       )}
     >
       {en && ar ? <BiInline en={en} ar={ar} /> : children}

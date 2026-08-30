@@ -39,12 +39,12 @@ export function Dropzone({
       {...getRootProps()}
       className={cn(
         "cursor-pointer rounded-card border border-dashed border-line bg-canvas/60 px-5 py-8 text-center transition-all",
-        isDragActive && "border-accent bg-accent-soft/40",
+        isDragActive && "border-gold bg-gold-soft/50",
         disabled && "cursor-not-allowed opacity-60",
       )}
     >
       <input {...getInputProps()} />
-      <Upload className="mx-auto h-5 w-5 text-ink-muted" />
+      <Upload className="mx-auto h-5 w-5 text-gold" strokeWidth={1.5} />
       <p className="mt-3 text-sm font-medium">
         {t("Drop a file or click to upload", "اسحب ملفاً أو اضغط للرفع")}
       </p>

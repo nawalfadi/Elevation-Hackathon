@@ -27,57 +27,57 @@ import type { ReactNode } from "react";
 const problems = [
   {
     icon: EyeOff,
-    title: { en: "No visibility", ar: "لا شفافية" },
+    title: { en: "Zero visibility", ar: "صفر شفافية" },
     body: {
-      en: "Applicants guess which documents they need. Reviewers open folders with no shared status.",
-      ar: "المتقدم يخمن المستندات المطلوبة. والمراجع يفتح مجلدات بلا حالة مشتركة.",
+      en: "Unclear requirements, leading to wrong, expired, or low-quality uploads.",
+      ar: "متطلبات غير واضحة تؤدي إلى رفع ملفات خاطئة أو منتهية أو ضعيفة الجودة.",
     },
   },
   {
     icon: FileSearch,
-    title: { en: "No proof", ar: "لا إثبات" },
+    title: { en: "Vague rejections", ar: "رفض غامض" },
     body: {
-      en: "Blurry IDs and incomplete packets still reach underwriting. Failures show up too late.",
-      ar: "هويات باهتة وملفات ناقصة تصل للتدقيق. والفشل يظهر متأخراً.",
+      en: 'Generic "incomplete document" notices without clear fix instructions.',
+      ar: "إشعارات عامة مثل «مستند ناقص» بلا تعليمات واضحة للإصلاح.",
     },
   },
   {
     icon: SlidersHorizontal,
-    title: { en: "No accountability", ar: "لا مساءلة" },
+    title: { en: "Branch dependency", ar: "الاعتماد على الفرع" },
     body: {
-      en: "Approve or reject happens in Slack and email. Nobody can explain the decision later.",
-      ar: "القبول والرفض يحدثان في الرسائل. ولا أحد يشرح القرار لاحقاً.",
+      en: "Manual in-person re-submissions and restarting from scratch for every loan.",
+      ar: "إعادة تقديم حضورية يدوية والبدء من الصفر مع كل قرض.",
     },
   },
 ];
 
 const roles = [
   {
-    title: { en: "Applicant", ar: "المتقدم" },
+    title: { en: "60–70% manual drag", ar: "٦٠–٧٠٪ عبء يدوي" },
     line: {
-      en: "A living checklist, drag-and-drop validation, and a live tracker after every decision.",
-      ar: "قائمة مستندات حيّة، تحقق بالسحب والإفلات، ومتتبع مباشر بعد كل قرار.",
+      en: "Employees sift through PDFs and chase applicants for missing files.",
+      ar: "الموظف يفرز ملفات PDF ويلاحق المتقدمين للمستندات الناقصة.",
     },
   },
   {
-    title: { en: "Reviewer", ar: "المراجع" },
+    title: { en: "5-tab system switching", ar: "التنقل بين خمس أنظمة" },
     line: {
-      en: "A file summary, open flags, and an AI recommendation before they post a decision.",
-      ar: "ملخص الملف والإشارات المفتوحة وتوصية الذكاء الاصطناعي قبل إصدار القرار.",
+      en: "Manually checking Absher, GOSI, Zakat, Sijil, and Simah.",
+      ar: "فحص يدوي في أبشر والتأمينات والزكاة والسجل وسمة.",
     },
   },
   {
-    title: { en: "Manager", ar: "المدير" },
+    title: { en: "Human-eye fraud risk", ar: "مخاطر احتيال بالعين المجردة" },
     line: {
-      en: "Volume, approval rate, and review time from real events — not a slide of fake numbers.",
-      ar: "الحجم ونسبة القبول ووقت المراجعة من أحداث حقيقية — ليست أرقاماً ثابتة.",
+      en: "Undetected tampering, inconsistent decisions, and systemic backlog.",
+      ar: "تلاعب غير مكتشف وقرارات غير متسقة وتراكم منهجي.",
     },
   },
   {
-    title: { en: "The system", ar: "النظام" },
+    title: { en: "Two products, one AI core", ar: "منتجان وقلب ذكاء واحد" },
     line: {
-      en: "Rules, statuses, and document types live in catalogs. The UI never hardcodes the product.",
-      ar: "القواعد والحالات وأنواع المستندات في كتالوجات. الواجهة لا تثبّت منطق المنتج.",
+      en: "A customer assistant and an employee copilot, sharing one verification engine.",
+      ar: "مساعد للعميل ومساعد للموظف على محرك تحقق واحد.",
     },
   },
 ];
@@ -85,87 +85,87 @@ const roles = [
 const features = [
   {
     icon: ListChecks,
-    title: { en: "Dynamic checklist", ar: "قائمة ديناميكية" },
+    title: { en: "Dynamic document checklist", ar: "قائمة مستندات ديناميكية" },
     body: {
-      en: "Answers fire a rules engine. Self-employed gets tax returns. Employed gets a letter.",
-      ar: "الإجابات تشغّل محرك قواعد. العمل الحر يطلب إقراراً. الموظف يطلب خطاب عمل.",
+      en: "Personalized, exact list by loan type.",
+      ar: "قائمة دقيقة ومخصصة حسب نوع القرض.",
     },
   },
   {
     icon: ScanSearch,
-    title: { en: "Live validation", ar: "تحقق فوري" },
+    title: { en: "Real-time validator", ar: "تحقق فوري" },
     body: {
-      en: "Pending, success, or error from an API — with the exact issue written back to the file.",
-      ar: "قيد الانتظار أو نجاح أو خطأ من الواجهة البرمجية — مع سبب واضح على الملف.",
+      en: "Catches blur, expiry, name/ID mismatch before submit.",
+      ar: "يلتقط الضباب وانتهاء الصلاحية وعدم تطابق الاسم أو الهوية قبل الإرسال.",
     },
   },
   {
     icon: BadgeCheck,
-    title: { en: "Status pipeline", ar: "مسار الحالة" },
+    title: { en: "Live tracker + rejection explainer", ar: "متتبع حي وشرح للرفض" },
     body: {
-      en: "Submitted, under review, approved, rejected. Stages come from the catalog, not a hardcoded bar.",
-      ar: "مقدَّم، قيد المراجعة، مقبول، مرفوض. المراحل من الكتالوج وليست شريطاً ثابتاً.",
+      en: "Status in the open. Fixes in plain Arabic.",
+      ar: "الحالة ظاهرة. والإصلاح بلغة عربية واضحة.",
     },
   },
   {
     icon: Flag,
-    title: { en: "Fraud flags", ar: "إشارات الاحتيال" },
+    title: { en: "Fraud detection engine", ar: "محرك كشف الاحتيال" },
     body: {
-      en: "Unreadable titles, income mismatch, pending statements — a dynamic list, not a badge.",
-      ar: "ملكية غير مقروءة أو دخل غير مطابق — قائمة ديناميكية لا شارة ثابتة.",
+      en: "Metadata checks, duplicate IPs/phones, and tamper flags.",
+      ar: "فحص البيانات الوصفية والأرقام المكررة وإشارات التلاعب.",
     },
   },
   {
     icon: Gauge,
-    title: { en: "AI copilot", ar: "مساعد ذكي" },
+    title: { en: "AI confidence + policy checker", ar: "درجة الثقة وفحص السياسة" },
     body: {
-      en: "Approve, review, or reject with confidence, risk score, and the factors that moved it.",
-      ar: "قبول أو مراجعة أو رفض مع الثقة ودرجة المخاطر والعوامل المؤثرة.",
+      en: "Score the file. Flag compliance gaps automatically.",
+      ar: "تقييم الملف وكشف فجوات الامتثال تلقائياً.",
     },
   },
 ];
 
 const journey = [
-  { step: "01", en: "Answers captured", ar: "التقاط الإجابات" },
-  { step: "02", en: "Checklist generated", ar: "توليد القائمة" },
-  { step: "03", en: "Files validated", ar: "التحقق من الملفات" },
-  { step: "04", en: "Packet submitted", ar: "تقديم الملف" },
-  { step: "05", en: "AI scored", ar: "تقييم الذكاء" },
-  { step: "06", en: "Decision posted", ar: "إصدار القرار" },
+  { step: "01", en: "Absher — ID & biometric", ar: "أبشر — الهوية والبصمة" },
+  { step: "02", en: "GOSI — employment & salary", ar: "التأمينات — العمل والراتب" },
+  { step: "03", en: "Zakat — revenue & tax", ar: "الزكاة — الإيراد والضريبة" },
+  { step: "04", en: "Sijil — commercial status", ar: "السجل — الحالة التجارية" },
+  { step: "05", en: "Simah — credit & risk", ar: "سمة — الائتمان والمخاطر" },
+  { step: "06", en: "Secure approval", ar: "اعتماد آمن" },
 ];
 
 const guardrails = [
   {
     icon: ShieldCheck,
-    title: { en: "Proof required", ar: "الإثبات إلزامي" },
+    title: { en: "In-browser client redaction", ar: "إخفاء من المتصفح" },
     body: {
-      en: "A file is not “uploaded.” It is validated against type, size, and quality before it counts.",
-      ar: "الملف لا يُعد مرفوعاً حتى يُتحقق من نوعه وحجمه وجودته.",
+      en: "PII, national ID numbers, and sensitive fields are blurred/masked on the client side before display.",
+      ar: "تُموَّه الهوية الوطنية والحقول الحساسة في المتصفح قبل العرض.",
     },
   },
   {
     icon: LayoutDashboard,
-    title: { en: "Rules, not if-statements", ar: "قواعد لا شروط ثابتة" },
+    title: { en: "Metadata tamper detection", ar: "كشف تلاعب البيانات الوصفية" },
     body: {
-      en: "Mortgage, auto, and business packs change when catalogs change. No redeploy for a new doc.",
-      ar: "حزم الرهن والسيارة والتجاري تتغير مع الكتالوج. بلا إعادة نشر لكل مستند جديد.",
+      en: "Instant local analysis flagging altered PDF timestamps, cloned layers, and suspicious editing software tags.",
+      ar: "تحليل محلي فوري يشير إلى تعديل الوقت أو الطبقات المنسوخة أو برامج التحرير المشبوهة.",
     },
   },
   {
     icon: Users,
-    title: { en: "Approval scales with risk", ar: "القبول يتناسب مع المخاطر" },
+    title: { en: "Zero-retention client mock", ar: "بدون احتفاظ بالملفات" },
     body: {
-      en: "Clean packets can go straight through. Flags and failed OCR force a human into the loop.",
-      ar: "الملفات النظيفة تمر مباشرة. الإشارات والفشل يجبران تدخلاً بشرياً.",
+      en: "Session-only memory simulation — no sensitive files persisted to a live database.",
+      ar: "ذاكرة للجلسة فقط — بلا حفظ ملفات حساسة في قاعدة بيانات حية.",
     },
   },
 ];
 
 const audit = [
-  { who: "Maya Chen", whoAr: "مايا تشن", en: "submitted a personal loan", ar: "قدّمت قرضاً شخصياً", time: "5d ago", timeAr: "قبل 5 أيام" },
-  { who: "System", whoAr: "النظام", en: "flagged an unreadable vehicle title", ar: "أشار إلى استمارة غير مقروءة", time: "4d ago", timeAr: "قبل 4 أيام" },
-  { who: "Alex Rivera", whoAr: "أليكس ريفيرا", en: "requested resubmission on the auto file", ar: "طلب إعادة رفع لملف السيارة", time: "1d ago", timeAr: "قبل يوم" },
-  { who: "Priya Shah", whoAr: "بريا شاه", en: "approved Jordan Hale’s mortgage", ar: "قبلت رهن جوردان هيل", time: "8d ago", timeAr: "قبل 8 أيام" },
+  { who: "Avg. loan processing", whoAr: "متوسط معالجة القرض", en: "2–3 weeks → 2–3 days", ar: "٢–٣ أسابيع ← ٢–٣ أيام", time: "ROI", timeAr: "الأثر" },
+  { who: "Employee review time", whoAr: "وقت مراجعة الموظف", en: "~45 min → ~8 min", ar: "~٤٥ د ← ~٨ د", time: "ROI", timeAr: "الأثر" },
+  { who: "Incomplete submissions", whoAr: "الطلبات الناقصة", en: "~60% → ~10%", ar: "~٦٠٪ ← ~١٠٪", time: "ROI", timeAr: "الأثر" },
+  { who: "Employee capacity", whoAr: "طاقة الموظف", en: "1x baseline → 5x throughput", ar: "١× ← ٥×", time: "ROI", timeAr: "الأثر" },
 ];
 
 export function PitchPage() {
@@ -173,16 +173,20 @@ export function PitchPage() {
 
   return (
     <div className="bg-canvas text-ink">
-      <header className="fixed inset-x-0 top-0 z-40 border-b border-white/5 bg-[#050507]/70 backdrop-blur-md">
+      <header className="fixed inset-x-0 top-0 z-40 border-b border-gold/20 bg-navy/80 backdrop-blur-md">
+        <div className="gold-rule" />
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          <Logo className="text-white" />
+          <Logo light size="md" />
           <div className="flex items-center gap-3">
+            <Link href="/shield" className="hidden text-sm text-silver hover:text-gold sm:inline">
+              <BiInline en="Behind the Shield" ar="خلف الدرع" />
+            </Link>
             <LanguageSwitch light />
             <Link
               href="/login"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-accent-soft"
+              className="inline-flex items-center gap-2 rounded-full bg-gold-gradient px-4 py-2 text-sm font-semibold text-navy shadow-gold transition-transform hover:-translate-y-0.5"
             >
-              <BiInline en="Open Elevation" ar="افتح إليفيشن" />
+              <BiInline en="Launch Live Demo" ar="افتح التجربة الحية" />
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -190,9 +194,14 @@ export function PitchPage() {
       </header>
 
       <section className="ink-panel relative flex min-h-screen flex-col justify-center px-6 pb-16 pt-28 text-white">
-        <div className="mx-auto w-full max-w-6xl">
+        <div className="relative z-10 mx-auto w-full max-w-6xl">
           <Reveal>
-            <Eyebrow en="Elevation" ar="إليفيشن" light />
+            <Logo light size="lg" />
+          </Reveal>
+          <Reveal delay={0.04}>
+            <div className="mt-8">
+              <Eyebrow en="AI Document Intelligence Platform" ar="منصة ذكاء المستندات" light />
+            </div>
           </Reveal>
           <Reveal delay={0.08}>
             <h1
@@ -202,15 +211,15 @@ export function PitchPage() {
             >
               {isAr ? (
                 <>
-                  الإقراض يعمل بالفوضى.
+                  الإقراض يستغرق أسابيع.
                   <br />
-                  بنينا الحل.
+                  <span className="gold-text">اختصرناه إلى دقائق.</span>
                 </>
               ) : (
                 <>
-                  Lending runs on chaos.
+                  Loan processing takes weeks.
                   <br />
-                  We built the fix.
+                  <span className="gold-text">We cut it to minutes.</span>
                 </>
               )}
             </h1>
@@ -222,15 +231,15 @@ export function PitchPage() {
               lang={isAr ? "ar" : "en"}
             >
               {t(
-                "One system replaces scattered checklists, email threads, and guesswork. Applicants upload with certainty. Reviewers decide with a copilot.",
-                "نظام واحد يستبدل القوائم المتفرقة والرسائل والتخمين. المتقدم يرفع بيقين. والمراجع يقرر بمساعد ذكي.",
+                "A unified, two-sided AI engine that validates customer documents instantly and gives employees an auto-verified copilot with direct simulated government integrations. 2–3 weeks → 2–3 days processing · 45 min → 8 min review · 5× reviewer capacity.",
+                "محرك ذكاء اصطناعي موحّد للطرفين يتحقق من مستندات العميل فوراً ويمنح الموظف مساعداً موثّقاً تلقائياً مع تكامل حكومي محاكى. ٢–٣ أسابيع ← ٢–٣ أيام · ٤٥ د ← ٨ د للمراجعة · ٥× طاقة المراجع.",
               )}
             </p>
           </Reveal>
         </div>
-        <div className="absolute inset-x-0 bottom-8 flex justify-center">
+        <div className="absolute inset-x-0 bottom-8 z-10 flex justify-center">
           <p className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-white/40">
-            {t("Scroll to explore", "مرّر للاستكشاف")}
+            {t("Scroll to explore pitch", "مرّر لاستكشاف العرض")}
             <ArrowDown className="h-3.5 w-3.5 animate-bounce" />
           </p>
         </div>
@@ -238,17 +247,17 @@ export function PitchPage() {
 
       <section className="mx-auto max-w-6xl px-6 py-28">
         <Reveal>
-          <Eyebrow en="The problem" ar="المشكلة" />
+          <Eyebrow en="// The pain points" ar="// نقاط الألم" />
           <h2 className="mt-4 font-display text-4xl tracking-tight sm:text-5xl">
-            <Bi en="Why this exists" ar="لماذا وُجد هذا" />
+            <Bi en="The customer friction" ar="احتكاك العميل" />
           </h2>
         </Reveal>
         <div className="mt-14 grid gap-5 md:grid-cols-3">
           {problems.map((item, index) => (
             <Reveal key={item.title.en} delay={index * 0.1}>
               <Card>
-                <item.icon className="h-5 w-5 text-accent" />
-                <h3 className="mt-5 text-xl font-semibold">
+                <item.icon className="h-5 w-5 text-gold" strokeWidth={1.5} />
+                <h3 className="mt-5 font-display text-xl font-bold">
                   <Bi pair={item.title} compact />
                 </h3>
                 <p className="mt-3 text-[15px] leading-7 text-ink-muted">
@@ -262,9 +271,9 @@ export function PitchPage() {
 
       <section className="mx-auto max-w-6xl px-6 py-28">
         <Reveal>
-          <Eyebrow en="The solution" ar="الحل" />
+          <Eyebrow en="// The architecture" ar="// البنية" />
           <h2 className="mt-4 font-display text-4xl tracking-tight sm:text-5xl">
-            <Bi en="Meet the roles" ar="تعرّف على الأدوار" />
+            <Bi en="The employee bottleneck" ar="اختناق الموظف" />
           </h2>
         </Reveal>
         <div className="mt-14 grid gap-5 md:grid-cols-2">
@@ -272,7 +281,7 @@ export function PitchPage() {
             <Reveal key={role.title.en} delay={index * 0.08}>
               <Card className="min-h-[180px]">
                 <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-faint">0{index + 1}</p>
-                <h3 className="mt-4 text-2xl font-semibold">
+                <h3 className="mt-4 font-display text-2xl font-bold">
                   <Bi pair={role.title} compact />
                 </h3>
                 <p className="mt-3 text-[15px] leading-7 text-ink-muted">
@@ -286,17 +295,17 @@ export function PitchPage() {
 
       <section className="mx-auto max-w-6xl px-6 py-28">
         <Reveal>
-          <Eyebrow en="What we built" ar="ماذا بنينا" />
+          <Eyebrow en="// Two connected products" ar="// منتجان متصلان" />
           <h2 className="mt-4 font-display text-4xl tracking-tight sm:text-5xl">
-            <Bi en="The product, not a deck" ar="المنتج نفسه، ليس عرضاً" />
+            <Bi en="One AI core" ar="قلب ذكاء واحد" />
           </h2>
         </Reveal>
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, index) => (
             <Reveal key={feature.title.en} delay={index * 0.08}>
               <Card>
-                <feature.icon className="h-5 w-5 text-accent" />
-                <h3 className="mt-5 text-lg font-semibold">
+                <feature.icon className="h-5 w-5 text-gold" strokeWidth={1.5} />
+                <h3 className="mt-5 font-display text-lg font-bold">
                   <Bi pair={feature.title} compact />
                 </h3>
                 <p className="mt-2 text-sm leading-6 text-ink-muted">
@@ -310,9 +319,9 @@ export function PitchPage() {
 
       <section className="mx-auto max-w-6xl px-6 py-28">
         <Reveal>
-          <Eyebrow en="How it works" ar="كيف يعمل" />
+          <Eyebrow en="// Automated cross-checking (simulated MVP)" ar="// فحص حكومي محاكى" />
           <h2 className="mt-4 font-display text-4xl tracking-tight sm:text-5xl">
-            <Bi en="The review journey" ar="رحلة المراجعة" />
+            <Bi en="Simulated government integration" ar="تكامل حكومي محاكى" />
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
@@ -322,7 +331,7 @@ export function PitchPage() {
                 <li key={item.step} className="flex flex-1 items-start">
                   <div className="flex min-w-0 flex-col items-center text-center">
                     <span className="font-mono text-[11px] text-ink-faint">{item.step}</span>
-                    <span className="mt-3 h-2.5 w-2.5 rounded-full bg-accent" />
+                    <span className="mt-3 h-2.5 w-2.5 rounded-full bg-gold shadow-gold" />
                     <span className="mt-3 max-w-[130px] text-sm font-medium leading-5">
                       <Bi en={item.en} ar={item.ar} compact />
                     </span>
@@ -337,17 +346,17 @@ export function PitchPage() {
 
       <section className="mx-auto max-w-6xl px-6 py-28">
         <Reveal>
-          <Eyebrow en="Why it’s trustworthy" ar="لماذا يمكن الوثوق به" />
+          <Eyebrow en="// Zero-data risk architecture" ar="// بدون مخاطر بيانات" />
           <h2 className="mt-4 font-display text-4xl tracking-tight sm:text-5xl">
-            <Bi en="Guardrails" ar="ضوابط الحماية" />
+            <Bi en="Security, privacy & trust" ar="الأمان والخصوصية والثقة" />
           </h2>
         </Reveal>
         <div className="mt-14 grid gap-5 md:grid-cols-3">
           {guardrails.map((item, index) => (
             <Reveal key={item.title.en} delay={index * 0.1}>
               <Card>
-                <item.icon className="h-5 w-5 text-accent" />
-                <h3 className="mt-5 text-xl font-semibold">
+                <item.icon className="h-5 w-5 text-gold" strokeWidth={1.5} />
+                <h3 className="mt-5 font-display text-xl font-bold">
                   <Bi pair={item.title} compact />
                 </h3>
                 <p className="mt-3 text-[15px] leading-7 text-ink-muted">
@@ -361,9 +370,9 @@ export function PitchPage() {
 
       <section className="mx-auto max-w-6xl px-6 py-28">
         <Reveal>
-          <Eyebrow en="Live audit trail" ar="سجل التدقيق الحي" />
+          <Eyebrow en="// Tangible ROI" ar="// أثر ملموس" />
           <h2 className="mt-4 font-display text-4xl tracking-tight sm:text-5xl">
-            <Bi en="Nothing disappears" ar="لا شيء يختفي" />
+            <Bi en="Before vs. after" ar="قبل وبعد" />
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
@@ -382,7 +391,8 @@ export function PitchPage() {
       </section>
 
       <section className="px-6 pb-16">
-        <div className="ink-panel mx-auto max-w-6xl rounded-[28px] px-8 py-20 text-white sm:px-16 sm:py-24">
+        <div className="ink-panel relative mx-auto max-w-6xl overflow-hidden rounded-[28px] px-8 py-20 text-white sm:px-16 sm:py-24">
+          <div className="relative z-10">
           <Reveal>
             <Eyebrow en="The handoff" ar="التسليم" light />
             <h2
@@ -392,42 +402,33 @@ export function PitchPage() {
             >
               {isAr ? (
                 <>
-                  هذا ليس نموذجاً.
+                  بُني للهاكاثون.
                   <br />
-                  إنه يعمل الآن.
+                  جاهز للتجربة.
                 </>
               ) : (
                 <>
-                  This isn’t a mockup.
+                  Built for the Hackathon.
                   <br />
-                  It’s live.
+                  Ready to Test.
                 </>
               )}
             </h2>
             <p className="mt-6 max-w-xl text-lg text-white/65" dir={isAr ? "rtl" : "ltr"} lang={isAr ? "ar" : "en"}>
               {t(
-                "Every checklist, flag, and chart on the next screen is computed — not hardcoded.",
-                "كل قائمة وإشارة ورسم في الشاشة التالية محسوب — وليس مكتوباً يدوياً.",
+                "Experience real-time document validation, metadata fraud flags, and instant employee summary profiles.",
+                "جرّب التحقق الفوري من المستندات وإشارات الاحتيال وملخص الموظف الفوري.",
               )}
             </p>
             <Link
               href="/login"
-              className="mt-10 inline-flex h-14 items-center gap-3 rounded-full px-7 text-base font-semibold text-white shadow-lift transition-transform hover:-translate-y-0.5"
-              style={{ background: "linear-gradient(135deg, #3D4F46 0%, #6B8A74 100%)" }}
+              className="mt-10 inline-flex h-14 items-center gap-3 rounded-full bg-gold-gradient px-7 text-base font-semibold text-navy shadow-gold transition-transform hover:-translate-y-0.5"
             >
-              <BiInline en="Open Elevation" ar="افتح إليفيشن" />
+              <BiInline en="Launch Live Demo" ar="افتح التجربة الحية" />
               <ArrowRight className="h-5 w-5" />
             </Link>
-            <div className="mt-6 space-y-1.5 font-mono text-[11px] text-white/45">
-              <p>
-                <BiInline en="Demo accounts · password demo" ar="حسابات تجريبية · كلمة المرور demo" />
-              </p>
-              <p>maya@elevation.app · {t("Customer", "عميل")}</p>
-              <p>jordan@elevation.app · {t("Customer", "عميل")}</p>
-              <p>alex@elevation.app · {t("Reviewer", "مراجع")}</p>
-              <p>priya@elevation.app · {t("Manager", "مدير")}</p>
-            </div>
           </Reveal>
+          </div>
         </div>
       </section>
     </div>
@@ -436,7 +437,7 @@ export function PitchPage() {
 
 function Card({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <article className={cn("h-full rounded-[24px] border border-line bg-white p-7 shadow-soft", className)}>
+    <article className={cn("h-full rounded-[24px] border border-line bg-surface p-7 shadow-soft", className)}>
       {children}
     </article>
   );

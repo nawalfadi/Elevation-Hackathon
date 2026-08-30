@@ -3,10 +3,12 @@ import type { ButtonHTMLAttributes } from "react";
 
 const variants = {
   primary:
-    "bg-accent text-white hover:bg-accent-hover shadow-soft disabled:bg-ink-faint",
+    "bg-gold-gradient text-navy shadow-gold hover:-translate-y-0.5 hover:shadow-lift disabled:bg-none disabled:bg-silver disabled:text-ink-faint disabled:shadow-none",
   secondary:
-    "bg-white text-ink border border-line hover:border-ink/20 hover:bg-canvas",
-  ghost: "bg-transparent text-ink hover:bg-white",
+    "bg-surface text-navy border border-silver/80 hover:border-gold/50 hover:bg-gold-soft",
+  outline:
+    "bg-transparent text-gold border border-gold/70 hover:bg-gold/10 hover:-translate-y-0.5",
+  ghost: "bg-transparent text-ink hover:bg-gold-soft",
   danger: "bg-terracotta text-white hover:opacity-90",
 };
 
@@ -32,7 +34,7 @@ export function Button({
     <button
       type={type}
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-control font-medium transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-60",
+        "inline-flex items-center justify-center gap-2 rounded-control font-semibold tracking-wide transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-60",
         variants[variant],
         sizes[size],
         className,

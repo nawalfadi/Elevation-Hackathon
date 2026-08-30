@@ -18,8 +18,8 @@ export function Stepper({
               <span
                 className={cn(
                   "flex h-7 w-7 items-center justify-center rounded-full text-xs font-medium",
-                  done && "bg-accent text-white",
-                  active && "bg-accent-soft text-accent",
+                  done && "bg-gold-gradient text-navy",
+                  active && "bg-gold-soft text-navy",
                   !done && !active && "bg-canvas text-ink-faint",
                 )}
               >

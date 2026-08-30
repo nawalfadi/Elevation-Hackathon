@@ -1,10 +1,19 @@
 import { cn } from "@frontend/utils/cn";
 import type { HTMLAttributes } from "react";
 
-export function Card({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+interface CardProps extends HTMLAttributes<HTMLDivElement> {
+  tone?: "light" | "navy";
+}
+
+export function Card({ className, tone = "light", ...props }: CardProps) {
   return (
     <div
-      className={cn("rounded-card border border-line bg-surface shadow-soft", className)}
+      className={cn(
+        "rounded-card border shadow-soft",
+        tone === "light" && "border-line bg-surface",
+        tone === "navy" && "border-gold/25 bg-navy-gradient text-cream shadow-navy",
+        className,
+      )}
       {...props}
     />
   );
@@ -15,7 +24,7 @@ export function CardHeader({ className, ...props }: HTMLAttributes<HTMLDivElemen
 }
 
 export function CardTitle({ className, ...props }: HTMLAttributes<HTMLHeadingElement>) {
-  return <h3 className={cn("text-lg font-semibold tracking-tight", className)} {...props} />;
+  return <h3 className={cn("font-display text-xl font-bold tracking-tight", className)} {...props} />;
 }
 
 export function CardDescription({ className, ...props }: HTMLAttributes<HTMLParagraphElement>) {

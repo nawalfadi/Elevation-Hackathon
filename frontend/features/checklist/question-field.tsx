@@ -54,7 +54,7 @@ export function QuestionField({
               type="button"
               onClick={() => onChange(option.val)}
               className={`h-11 flex-1 rounded-control border text-sm ${
-                value === option.val ? "border-accent bg-accent-soft text-accent" : "border-line bg-white"
+                value === option.val ? "border-gold bg-gold-soft text-navy" : "border-line bg-surface"
               }`}
             >
               <BiInline en={option.en} ar={option.ar} />

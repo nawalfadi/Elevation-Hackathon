@@ -32,17 +32,17 @@ export function AiRecommendationBox({ recommendation }: { recommendation: AiReco
           <Bi pair={overlay(recommendation.rationale)} compact />
         </p>
         <div className="grid gap-3 sm:grid-cols-2">
-          <div className="rounded-control bg-canvas px-4 py-3">
-            <p className="text-xs text-ink-faint">
+          <div className="rounded-control border border-gold/20 bg-navy px-4 py-3 text-cream">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-silver">
               <BiInline en="Confidence" ar="الثقة" />
             </p>
-            <p className="mt-1 text-lg font-semibold">{Math.round(recommendation.confidence * 100)}%</p>
+            <p className="mt-1 font-display text-2xl font-bold text-gold">{Math.round(recommendation.confidence * 100)}%</p>
           </div>
-          <div className="rounded-control bg-canvas px-4 py-3">
-            <p className="text-xs text-ink-faint">
+          <div className="rounded-control border border-gold/20 bg-navy px-4 py-3 text-cream">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-silver">
               <BiInline en="Risk score" ar="درجة المخاطر" />
             </p>
-            <p className="mt-1 text-lg font-semibold">{recommendation.risk_score}</p>
+            <p className="mt-1 font-display text-2xl font-bold text-gold">{recommendation.risk_score}</p>
           </div>
         </div>
         <ul className="space-y-2">

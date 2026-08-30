@@ -2,10 +2,10 @@ import { cn } from "@frontend/utils/cn";
 import type { HTMLAttributes } from "react";
 
 const tones = {
-  neutral: "bg-canvas text-ink-muted",
-  accent: "bg-accent-soft text-accent",
-  success: "bg-forest-soft text-forest",
-  warning: "bg-amber-soft text-amber",
+  neutral: "bg-cream-muted text-ink-faint border border-silver/60",
+  accent: "bg-gold-gradient text-navy shadow-gold",
+  success: "bg-teal-soft text-teal",
+  warning: "bg-gold-soft text-amber",
   danger: "bg-terracotta-soft text-terracotta",
 };
 
@@ -17,7 +17,7 @@ export function Badge({ className, tone = "neutral", ...props }: BadgeProps) {
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium",
+        "inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.12em]",
         tones[tone],
         className,
       )}

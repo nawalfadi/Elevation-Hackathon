@@ -39,7 +39,7 @@ export function ReviewActions({ applicationId }: { applicationId: string }) {
               type="button"
               onClick={() => setDecision(item.value)}
               className={`rounded-control border px-3 py-2 text-sm ${
-                decision === item.value ? "border-accent bg-accent-soft text-accent" : "border-line bg-white"
+                decision === item.value ? "border-gold bg-gold-soft text-navy" : "border-line bg-surface"
               }`}
             >
               <BiInline pair={lookup(decisionCopy, item.value, item.label)} />

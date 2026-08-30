@@ -22,6 +22,11 @@ const rolesAr: Record<string, string> = {
   manager: "مدير",
 };
 
+function isNavActive(pathname: string, href: string) {
+  if (href === "/app" || href === "/admin") return pathname === href;
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
 interface NavItem {
   href: string;
   label: string;
@@ -46,10 +51,11 @@ export function AppShell({
 
   return (
     <div className="min-h-screen bg-canvas">
-      <header className="sticky top-0 z-40 border-b border-line bg-white/90 backdrop-blur">
+      <header className="sticky top-0 z-40 border-b border-gold/20 bg-navy/95 text-cream backdrop-blur">
+        <div className="gold-rule" />
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
           <Link href={user?.role === "customer" ? "/app" : "/admin"}>
-            <Logo />
+            <Logo light />
           </Link>
           <nav className="hidden items-center gap-1 md:flex">
             {visible.map((item) => (
@@ -58,9 +64,9 @@ export function AppShell({
                 href={item.href}
                 className={cn(
                   "rounded-full px-3 py-1.5 text-sm transition-colors",
-                  pathname === item.href || pathname.startsWith(`${item.href}/`)
-                    ? "bg-accent-soft text-accent"
-                    : "text-ink-muted hover:text-ink",
+                  isNavActive(pathname, item.href)
+                    ? "bg-gold-gradient text-navy"
+                    : "text-silver hover:text-cream",
                 )}
               >
                 <BiInline en={item.label} ar={item.labelAr} />
@@ -69,12 +75,12 @@ export function AppShell({
           </nav>
           <div className="flex items-center gap-3">
             <div className="hidden text-right sm:block">
-              <p className="text-sm font-medium">{user?.full_name}</p>
-              <p className="text-xs capitalize text-ink-muted">{roleLabel}</p>
+              <p className="text-sm font-medium text-cream">{user?.full_name}</p>
+              <p className="text-xs capitalize text-silver">{roleLabel}</p>
             </div>
-            <LanguageSwitch />
+            <LanguageSwitch light />
             <button
-              className="text-sm text-ink-muted hover:text-ink"
+              className="text-sm text-silver hover:text-gold"
               onClick={() => logout.mutate()}
             >
               <BiInline en="Sign out" ar="تسجيل الخروج" />
@@ -88,7 +94,7 @@ export function AppShell({
               href={item.href}
               className={cn(
                 "whitespace-nowrap rounded-full px-3 py-1.5 text-sm",
-                pathname === item.href ? "bg-accent-soft text-accent" : "text-ink-muted",
+                isNavActive(pathname, item.href) ? "bg-gold-gradient text-navy" : "text-silver",
               )}
             >
               <BiInline en={item.label} ar={item.labelAr} />

@@ -17,7 +17,7 @@ export function Input({ className, label, hint, error, suffix, id, ...props }: I
         <input
           id={inputId}
           className={cn(
-            "h-11 w-full rounded-control border border-line bg-white px-3 text-sm outline-none transition-all placeholder:text-ink-faint focus:border-accent/40 focus:ring-4 focus:ring-accent/10",
+            "h-11 w-full rounded-control border border-line bg-surface px-3 text-sm outline-none transition-all placeholder:text-ink-faint focus:border-gold/50 focus:ring-4 focus:ring-gold/15",
             error && "border-terracotta focus:border-terracotta focus:ring-terracotta/10",
             suffix && "pr-10",
             className,
