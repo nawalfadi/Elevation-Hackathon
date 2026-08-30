@@ -8,7 +8,7 @@ export async function uploadApplicationFile(input: {
   fileName: string;
   mimeType: string;
   bytes: Buffer;
-}) {
+}): Promise<string | null> {
   if (!isFirebaseStorageEnabled()) return null;
 
   const storage = getAdminStorage();

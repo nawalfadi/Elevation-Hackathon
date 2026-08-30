@@ -30,7 +30,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
       bytes,
     });
 
-    let filePath = remotePath;
+    let filePath: string | null = remotePath;
     if (!filePath) {
       const destDir = path.join(process.cwd(), ".data", "uploads", id);
       mkdirSync(destDir, { recursive: true });
