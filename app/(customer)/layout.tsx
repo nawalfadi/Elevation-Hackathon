@@ -1,5 +1,6 @@
 import { AppShell } from "@frontend/components/layout/app-shell";
 import { getSession } from "@backend/auth/session";
+import { ChatWidget } from "@frontend/features/chat/components/chat-widget";
 import { redirect } from "next/navigation";
 
 export default async function CustomerLayout({ children }: { children: React.ReactNode }) {
@@ -16,6 +17,7 @@ export default async function CustomerLayout({ children }: { children: React.Rea
       ]}
     >
       {children}
+      <ChatWidget />
     </AppShell>
   );
 }
