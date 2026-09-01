@@ -1,6 +1,12 @@
-import { json } from "@backend/api/http";
+import { errorResponse, json } from "@backend/api/http";
 import { store } from "@backend/db/store";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
-  return json(await store.listStatuses());
+  try {
+    return json(await store.listStatuses());
+  } catch (error) {
+    return errorResponse(error);
+  }
 }

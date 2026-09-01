@@ -37,7 +37,7 @@ export async function POST(request: Request) {
       full_name: body.full_name,
       role: body.role ?? "customer",
     });
-    await setSessionCookie(user.id);
+    await setSessionCookie(store.publicUser(user));
     return json({
       user: store.publicUser(user),
       session: {

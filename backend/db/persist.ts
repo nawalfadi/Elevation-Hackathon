@@ -3,7 +3,6 @@ import os from "os";
 import path from "path";
 import { collectionNames, collections } from "@backend/firebase/collections";
 import { isFirebaseConfigured } from "@backend/firebase/config";
-import { getAdminFirestore } from "@backend/firebase/admin";
 import { createSeed } from "./seed";
 import type { DatabaseTables } from "@backend/types";
 import { TimeoutError, withTimeout } from "@backend/utils/timeout";
@@ -36,6 +35,7 @@ function fileSave(db: DatabaseTables) {
 }
 
 async function firestoreLoad(): Promise<DatabaseTables | null> {
+  const { getAdminFirestore } = await import("@backend/firebase/admin");
   const firestore = getAdminFirestore();
   if (!firestore) return null;
 
@@ -55,6 +55,7 @@ async function firestoreLoad(): Promise<DatabaseTables | null> {
 }
 
 async function firestoreSave(db: DatabaseTables) {
+  const { getAdminFirestore } = await import("@backend/firebase/admin");
   const firestore = getAdminFirestore();
   if (!firestore) return;
 

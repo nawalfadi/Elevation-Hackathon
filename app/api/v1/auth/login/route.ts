@@ -6,6 +6,8 @@ import { signInWithPassword } from "@backend/firebase/auth-rest";
 import { isFirebaseClientConfigured } from "@backend/firebase/config";
 import { TimeoutError, withTimeout } from "@backend/utils/timeout";
 
+export const dynamic = "force-dynamic";
+
 const schema = z.object({
   email: z.string().email(),
   password: z.string().min(1),
@@ -44,7 +46,7 @@ export async function POST(request: Request) {
       return json({ error: "Invalid email or password. · البريد أو كلمة المرور غير صحيحة." }, 401);
     }
 
-    await setSessionCookie(user.id);
+    await setSessionCookie(store.publicUser(user));
     return json({
       user: store.publicUser(user),
       session: {
