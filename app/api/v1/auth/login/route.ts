@@ -15,17 +15,28 @@ export async function POST(request: Request) {
   try {
     const body = schema.parse(await readJson(request));
     let firebaseOk = false;
+    let firebaseId: string | undefined;
 
     if (isFirebaseClientConfigured()) {
       try {
-        await withTimeout(signInWithPassword(body.email, body.password), 2500);
+        const signedIn = await withTimeout(signInWithPassword(body.email, body.password), 2500);
         firebaseOk = true;
+        firebaseId = typeof signedIn.localId === "string" ? signedIn.localId : undefined;
       } catch (error) {
         if (!(error instanceof TimeoutError)) throw error;
       }
     }
 
-    const user = await store.findUserByEmail(body.email);
+    let user = await store.findUserByEmail(body.email);
+    if (!user && firebaseOk) {
+      user = await store.createUser({
+        id: firebaseId,
+        email: body.email,
+        password: body.password,
+        full_name: body.email.split("@")[0] || body.email,
+        role: "customer",
+      });
+    }
     if (!user) {
       return json({ error: "Invalid email or password. · البريد أو كلمة المرور غير صحيحة." }, 401);
     }

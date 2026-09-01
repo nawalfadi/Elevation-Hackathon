@@ -1,4 +1,5 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
+import os from "os";
 import path from "path";
 import { collectionNames, collections } from "@backend/firebase/collections";
 import { isFirebaseConfigured } from "@backend/firebase/config";
@@ -7,7 +8,8 @@ import { createSeed } from "./seed";
 import type { DatabaseTables } from "@backend/types";
 import { TimeoutError, withTimeout } from "@backend/utils/timeout";
 
-const DATA_DIR = path.join(process.cwd(), ".data");
+const isServerless = Boolean(process.env.NETLIFY || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.LAMBDA_TASK_ROOT);
+const DATA_DIR = isServerless ? path.join(os.tmpdir(), "elevation-data") : path.join(process.cwd(), ".data");
 const STORE_PATH = path.join(DATA_DIR, "store.json");
 const FIRESTORE_BUDGET_MS = 2500;
 
@@ -16,13 +18,21 @@ export function usesFirebase() {
 }
 
 function fileLoad(): DatabaseTables | null {
-  if (!existsSync(STORE_PATH)) return null;
-  return JSON.parse(readFileSync(STORE_PATH, "utf8")) as DatabaseTables;
+  try {
+    if (!existsSync(STORE_PATH)) return null;
+    return JSON.parse(readFileSync(STORE_PATH, "utf8")) as DatabaseTables;
+  } catch {
+    return null;
+  }
 }
 
 function fileSave(db: DatabaseTables) {
-  if (!existsSync(DATA_DIR)) mkdirSync(DATA_DIR, { recursive: true });
-  writeFileSync(STORE_PATH, JSON.stringify(db), "utf8");
+  try {
+    if (!existsSync(DATA_DIR)) mkdirSync(DATA_DIR, { recursive: true });
+    writeFileSync(STORE_PATH, JSON.stringify(db), "utf8");
+  } catch (error) {
+    console.warn("Local store write skipped", error);
+  }
 }
 
 async function firestoreLoad(): Promise<DatabaseTables | null> {
@@ -64,9 +74,6 @@ async function firestoreSave(db: DatabaseTables) {
 }
 
 export async function loadDatabase(): Promise<DatabaseTables> {
-  const local = fileLoad();
-  if (local) return local;
-
   if (usesFirebase()) {
     try {
       const remote = await withTimeout(firestoreLoad(), FIRESTORE_BUDGET_MS);
@@ -80,6 +87,9 @@ export async function loadDatabase(): Promise<DatabaseTables> {
       }
     }
   }
+
+  const local = fileLoad();
+  if (local) return local;
 
   const seed = createSeed();
   fileSave(seed);

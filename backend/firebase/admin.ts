@@ -8,14 +8,19 @@ function getAdminApp() {
   const config = getFirebaseAdminConfig();
   if (!config) return null;
   if (getApps().length) return getApps()[0];
-  return initializeApp({
-    credential: cert({
-      projectId: config.projectId,
-      clientEmail: config.clientEmail,
-      privateKey: config.privateKey,
-    }),
-    storageBucket: config.storageBucket,
-  });
+  try {
+    return initializeApp({
+      credential: cert({
+        projectId: config.projectId,
+        clientEmail: config.clientEmail,
+        privateKey: config.privateKey,
+      }),
+      storageBucket: config.storageBucket,
+    });
+  } catch (error) {
+    console.error("Firebase admin init failed", error);
+    return null;
+  }
 }
 
 export function getAdminAuth() {
