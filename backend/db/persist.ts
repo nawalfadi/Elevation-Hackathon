@@ -7,7 +7,7 @@ import { createSeed } from "./seed";
 import type { DatabaseTables } from "@backend/types";
 import { TimeoutError, withTimeout } from "@backend/utils/timeout";
 
-const isServerless = Boolean(process.env.NETLIFY || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.LAMBDA_TASK_ROOT);
+const isServerless = Boolean(process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.LAMBDA_TASK_ROOT);
 const DATA_DIR = isServerless ? path.join(os.tmpdir(), "elevation-data") : path.join(process.cwd(), ".data");
 const STORE_PATH = path.join(DATA_DIR, "store.json");
 const FIRESTORE_BUDGET_MS = 2500;
